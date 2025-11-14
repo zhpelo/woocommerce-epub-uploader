@@ -201,7 +201,7 @@ class WC_Epub_Uploader
     private function extract_epub_cover($epub_file)
     {
         // 创建临时封面文件路径
-        $cover_path = sys_get_temp_dir() . 'epub_cover_' . uniqid() . '.jpg';
+        $cover_path = sys_get_temp_dir() . '/epub_cover_' . uniqid() . '.jpg';
 
         // 执行 ebook-meta 命令提取封面
         $command = sprintf(
