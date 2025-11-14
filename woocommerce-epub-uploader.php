@@ -4,7 +4,7 @@
  * Plugin Name: WooCommerce EPUB Uploader
  * Description: 上传EPUB文件，自动生成商品。
  * Version: 1.0
- * Author: Your Name
+ * Author: zhpelo
  * Requires Plugins: woocommerce
  */
 
