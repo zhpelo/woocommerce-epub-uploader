@@ -104,7 +104,7 @@ class WC_Epub_Uploader
         }
 
         // Copy to temp instead of moving (to avoid permission issues)
-        $temp_file = wp_tempnam('epub_', sys_get_temp_dir()) . '.epub';
+        $temp_file = wp_tempnam() ;
         if (!copy($file['tmp_name'], $temp_file)) {
             wp_die('Failed to copy uploaded file.');
         }
