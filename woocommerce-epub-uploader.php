@@ -103,12 +103,14 @@ class WC_Epub_Uploader
             wp_die('Only .epub files are allowed.');
         }
 
-        $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
-
         // Copy to temp instead of moving (to avoid permission issues)
-        $temp_file = $file['tmp_name'];
+        $temp_file = wp_tempnam('epub_', sys_get_temp_dir()."/") . '.epub';
+        if (!copy($file['tmp_name'], $temp_file)) {
+            wp_die('Failed to copy uploaded file.');
+        }
 
         // Remove the temporary file created by WordPress
+        @unlink($file['tmp_name']);
 
         // 使用 calibre 的 ebook-meta 命令解析 EPUB 文件
         $meta = $this->extract_epub_metadata($temp_file);
@@ -123,6 +125,7 @@ class WC_Epub_Uploader
         );
 
         // Clean up
+        unlink($temp_file);
         if ($cover_path && file_exists($cover_path)) {
             unlink($cover_path);
         }
