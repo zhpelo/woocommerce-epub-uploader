@@ -8,6 +8,8 @@
  * Requires Plugins: woocommerce
  */
 
+// mac  /Applications/calibre.app/Contents/MacOS/ebook-meta
+
 if (!defined('ABSPATH')) exit;
 
 define('WEU_PLUGIN_DIR', plugin_dir_path(__FILE__));
@@ -132,7 +134,7 @@ class WC_Epub_Uploader
     private function extract_epub_metadata($epub_file)
     {
         // 执行 ebook-meta 命令获取元数据
-        $command = sprintf('/Applications/calibre.app/Contents/MacOS/ebook-meta "%s"', $epub_file);
+        $command = sprintf('ebook-meta "%s" 2>/dev/null', $epub_file);
         $output = shell_exec($command);
 
         if (!$output) {
@@ -199,7 +201,7 @@ class WC_Epub_Uploader
 
         // 执行 ebook-meta 命令提取封面
         $command = sprintf(
-            '/Applications/calibre.app/Contents/MacOS/ebook-meta "%s" --get-cover="%s"',
+            'ebook-meta "%s" --get-cover="%s" 2>/dev/null',
             $epub_file,
             $cover_path
         );
