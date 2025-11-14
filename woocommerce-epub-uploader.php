@@ -104,7 +104,7 @@ class WC_Epub_Uploader
         }
 
         // Copy to temp instead of moving (to avoid permission issues)
-        $temp_file = wp_tempnam('epub_', sys_get_temp_dir()."/") . '.epub';
+        $temp_file = wp_tempnam('epub_',  trailingslashit(sys_get_temp_dir())) . '.epub';
         if (!copy($file['tmp_name'], $temp_file)) {
             wp_die('Failed to copy uploaded file.');
         }
@@ -201,7 +201,7 @@ class WC_Epub_Uploader
     private function extract_epub_cover($epub_file)
     {
         // 创建临时封面文件路径
-        $cover_path = sys_get_temp_dir() . '/epub_cover_' . uniqid() . '.jpg';
+        $cover_path = trailingslashit(sys_get_temp_dir()) . 'epub_cover_' . uniqid() . '.jpg';
 
         // 执行 ebook-meta 命令提取封面
         $command = sprintf(
